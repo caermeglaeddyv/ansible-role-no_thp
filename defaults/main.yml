@@ -1,0 +1,6 @@
+---
+# defaults file for no_thp
+
+
+# Tuned profile which is used as base in new no-thp profile:
+no_thp_tuned_profile: virtual-guest

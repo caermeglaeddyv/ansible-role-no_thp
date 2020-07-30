@@ -1,0 +1,28 @@
+---
+# tasks file for no_thp
+- name: create directory for new tuned profile config
+  file:
+    path: /etc/tuned/no-thp
+    state: directory
+
+- name: copy tuned config
+  template:
+    src: etc_tuned_no-thp_tuned.conf.j2
+    dest: /etc/tuned/no-thp/tuned.conf
+
+- name: apply new tuned profile and defrag config
+  shell: |
+    /sbin/tuned-adm profile no-thp
+    && /bin/echo never > /sys/kernel/mm/transparent_hugepage/defrag
+
+- name: configure no thp service
+  copy:
+    src: etc_systemd_system_disable-transparent-hugepages.service
+    dest: /etc/systemd/system/disable-transparent-hugepages.service
+
+- name: start and enable no thp service
+  systemd:
+    daemon_reload: yes
+    name: disable-transparent-hugepages
+    enabled: yes
+    state: started
