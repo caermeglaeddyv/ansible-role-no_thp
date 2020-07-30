@@ -1,4 +1,4 @@
-No THP
+Ansible role: No THP
 =========
 
 This role is used to disable transparent huge pages via tuned profile and systemd service unit file.
