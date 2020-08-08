@@ -12,7 +12,7 @@
 
 - name: apply new tuned profile and defrag config
   shell: |
-    /sbin/tuned-adm profile no-thp
+    /sbin/tuned-adm profile no-thp \
     && /bin/echo never > /sys/kernel/mm/transparent_hugepage/defrag
 
 - name: configure no thp service
